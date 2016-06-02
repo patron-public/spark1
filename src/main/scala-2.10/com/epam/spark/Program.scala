@@ -3,27 +3,24 @@ package com.epam.spark
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 
-object Program{
+object AvgBytesCounter {
 
   val appName:String = "Server Log Analuzer"
   val master:String = "local"
   var sc:SparkContext = _
 
   def main(args: Array[String]) {
-//    if (args.length != 2){
-//      print("Please use 2 parameters: [source file, dest file]")
-//      System.exit(1)
-//    }
+    if (args.length != 2){
+      print("Please use 2 parameters: [source file, dest file]")
+      System.exit(1)
+    }
 
     val conf = new SparkConf().setAppName(appName).setMaster(master)
     sc = new SparkContext(conf)
 
     val dataset = sc.textFile(args(0))
-    //val dataset = sc.textFile("/hw/spark1/dataset.txt")
     val topLogs = getTop5(dataset)
-
     topLogs.saveAsTextFile("hdfs://"+ args(1))
-    //topLogs.saveAsTextFile("hdfs:///hw/spark1/avgBytesTop5")
 
   }
 
