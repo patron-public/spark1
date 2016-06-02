@@ -5,7 +5,7 @@ import org.apache.spark.{SparkConf, SparkContext}
 
 object AvgBytesCounter {
 
-  val appName:String = "Server Log Analizer"
+  val appName:String = "Server Log Analyzer"
   val master:String = "local"
   var sc:SparkContext = _
 
@@ -18,8 +18,8 @@ object AvgBytesCounter {
     val conf = new SparkConf().setAppName(appName).setMaster(master)
     sc = new SparkContext(conf)
 
-    val dataset = sc.textFile(args(0))
-    val topLogs = getTop5(dataset)
+    val dataSet = sc.textFile(args(0))
+    val topLogs = getTop5(dataSet)
     topLogs.saveAsTextFile("hdfs://"+ args(1))
 
   }
@@ -39,7 +39,6 @@ object AvgBytesCounter {
 
 
   def arrStats(arr: Iterable[Int]):(Int, Int)={
-
     var totalBytes:Int = 0
     var counter:Int = 0
     arr.foreach(elem =>
@@ -56,6 +55,7 @@ object AvgBytesCounter {
       return 0
     return elem.toInt
   }
+
   def parseIp(str:String):Int={
     val elem:String = str.substring(2, str.length)
     return elem.toInt

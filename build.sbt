@@ -4,7 +4,7 @@ version := "1.0"
 
 scalaVersion := "2.10.5"
 
-mainClass in Compile := Some("com.epam.spark.Program")
+mainClass in Compile := Some("com.epam.spark.AvgBytesCounter")
 
 libraryDependencies ++= Seq(
   ("org.apache.spark" % "spark-core_2.10" % "1.6.0").
