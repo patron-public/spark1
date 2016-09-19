@@ -16,17 +16,3 @@ libraryDependencies ++= Seq(
     exclude("com.google.guava", "guava")
 )
 
-assemblyMergeStrategy in assembly := {
-
-  case PathList("org", "apache", "spark", "unused", "UnusedStubClass.class")
-  => MergeStrategy.first
-
-  case PathList("org", "apache", "hadoop")
-  => MergeStrategy.first
-
-  case "package-info.class"
-  => MergeStrategy.concat
-
-  case x => (assemblyMergeStrategy in assembly).value(x)
-
-}
